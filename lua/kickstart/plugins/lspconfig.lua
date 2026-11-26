@@ -103,7 +103,10 @@ vim.api.nvim_create_autocmd('LspAttach', {
 --  See `:help lsp-config` for information about keys and how to configure
 ---@type table<string, vim.lsp.Config>
 local servers = {
-  -- clangd = {},
+  clangd = {},
+  buck2 = {
+    cmd = { 'scripts/buck2', 'lsp' },
+  },
   -- gopls = {},
   -- pyright = {},
   -- tsc = {},
@@ -176,7 +179,7 @@ vim.list_extend(ensure_installed, {
   -- You can add other tools here that you want Mason to install
 })
 
-require('mason-tool-installer').setup { ensure_installed = ensure_installed }
+-- require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
 for name, server in pairs(servers) do
   vim.lsp.config(name, server)
